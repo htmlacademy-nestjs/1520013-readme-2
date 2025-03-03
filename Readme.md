@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Владимир Дьяченко](https://up.htmlacademy.ru/nodejs-2-individual/2/user/1520013).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Наумов](https://htmlacademy.ru/profile/id99424).
 
 ---
 
