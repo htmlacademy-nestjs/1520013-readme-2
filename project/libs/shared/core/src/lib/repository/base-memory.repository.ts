@@ -11,7 +11,7 @@ export abstract class BaseMemoryRepository<T extends Entity<EntityIdType>>
     return this.#entities;
   }
 
-  async findById(id: T['id']): Promise<T> {
+  async findById(id: T['id']): Promise<T | null> {
     return this.entities.get(id) || null;
   }
 
