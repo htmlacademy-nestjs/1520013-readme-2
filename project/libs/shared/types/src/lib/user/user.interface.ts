@@ -5,8 +5,7 @@ export interface IUser {
   email: string;
   firstname: string;
   lastname: string;
-  dob: string;
-  avatar?: string;
+  avatar?: string; // TODO пока стринг, потом скорее всего это будет референс к файлу
   role: EUserRole;
   createdAt: string;
 }
