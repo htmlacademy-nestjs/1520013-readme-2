@@ -3,7 +3,7 @@ import { ITag } from '../tag';
 import { EPostStatus } from './post-status.enum';
 
 export interface IBasePost {
-  id: number;
+  id: string;
   authorId: IUser['id'];
   status: EPostStatus;
   tags: ITag['id'][];
