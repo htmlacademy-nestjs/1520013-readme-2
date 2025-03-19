@@ -20,6 +20,12 @@ import { TagRdo } from './rdo/tag.rdo';
 export class BlogTagController {
   constructor(private readonly tagService: BlogTagService) {}
 
+  @ApiResponse({
+    type: TagRdo,
+    status: HttpStatus.CREATED,
+    description: 'Tag was created',
+  })
+  @HttpCode(HttpStatus.CREATED)
   @Post('/create')
   public async create(@Body() dto: CreateTagDto) {
     const tag = await this.tagService.createTag(dto);
@@ -77,9 +83,9 @@ export class BlogTagController {
   })
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete('/:id')
-  public async deleteById(@Param('id') id: ITag['id']) {
-    const result = await this.tagService.deleteById(id);
+  public async deleteById(@Param('id') id: ITag['id']): Promise<void> {
+    await this.tagService.deleteById(id);
 
-    return result;
+    return void 0;
   }
 }
