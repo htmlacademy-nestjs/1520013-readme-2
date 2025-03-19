@@ -1,11 +1,11 @@
 import { Entity } from '@project/core';
-import { IComment } from '@project/types';
+import { IBasePost, IComment, IUser } from '@project/types';
 
 export class BlogCommentEntity implements IComment, Entity<string> {
   id!: string;
   message!: string;
-  authorId!: string;
-  postId!: number;
+  authorId!: IUser['id'];
+  postId!: IBasePost['id'];
   createdAt!: string;
 
   constructor(comment: IComment) {
