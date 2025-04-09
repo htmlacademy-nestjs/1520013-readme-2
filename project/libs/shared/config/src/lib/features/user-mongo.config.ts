@@ -1,17 +1,9 @@
 import Joi = require('joi');
 import { registerAs } from '@nestjs/config';
 import { validateConfig } from '../../utils';
+import { MongoCredentials } from '../interface/mongo-credentials';
 
 const MONGO_DB_DEFAULT_PORT = 27017;
-
-export interface MongoConfig {
-  host: string;
-  port: number;
-  dbName: string;
-  user: string;
-  password: string;
-  authSource: string;
-}
 
 const mongoDbValidationSchema = Joi.object({
   host: Joi.string().not('').hostname().required(),
@@ -22,8 +14,8 @@ const mongoDbValidationSchema = Joi.object({
   authSource: Joi.string().not('').required(),
 });
 
-function getConfig(): MongoConfig {
-  const config: MongoConfig = {
+function getConfig(): MongoCredentials {
+  const config: MongoCredentials = {
     host: process.env['MONGO_HOST'] ?? '',
     port: Number(process.env['MONGO_PORT'] ?? MONGO_DB_DEFAULT_PORT),
     dbName: process.env['MONGO_DB'] || '',

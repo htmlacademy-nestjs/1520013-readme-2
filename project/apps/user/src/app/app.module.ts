@@ -1,11 +1,22 @@
 import { Module } from '@nestjs/common';
-import { BlogUserModule } from './blog-user/blog-user.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import {
+  ConfigUserModule,
+  getMongooseMongooseOptions,
+  userMongoConfig,
+} from '@project/config';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { ConfigUserModule } from '@project/config';
+import { BlogUserModule } from './blog-user/blog-user.module';
 
 @Module({
-  imports: [AuthenticationModule, BlogUserModule, ConfigUserModule],
+  imports: [
+    AuthenticationModule,
+    BlogUserModule,
+    ConfigUserModule,
+    MongooseModule.forRootAsync(
+      getMongooseMongooseOptions(userMongoConfig, 'UserService')
+    ),
+  ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {}

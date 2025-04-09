@@ -31,13 +31,14 @@ export class BlogUserEntity implements IUserWithPassword, Entity<string> {
   }
 
   public populate(data: IUserWithPassword): void {
+    this.id = data.id;
     this.email = data.email;
     this.firstname = data.firstname;
     this.lastname = data.lastname;
     this.role = data.role;
+    this.passwordHash = data.passwordHash;
     this.avatar = data.avatar;
     this.createdAt = data.createdAt;
-    this.id = data.id;
   }
 
   public async setPassword(password: string): Promise<BlogUserEntity> {
@@ -48,5 +49,9 @@ export class BlogUserEntity implements IUserWithPassword, Entity<string> {
 
   public async comparePassword(password: string): Promise<boolean> {
     return compare(password, this.passwordHash);
+  }
+
+  static fromObject(data: IUserWithPassword): BlogUserEntity {
+    return new BlogUserEntity(data);
   }
 }
