@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { getDateNow } from '@project/helpers';
 import { EUserRole, IUserWithPassword } from '@project/types';
 import { Document } from 'mongoose';
 
@@ -45,11 +44,8 @@ export class BlogUserModel extends Document implements IUserWithPassword {
   })
   role: EUserRole = EUserRole.User;
 
-  @Prop({
-    required: true,
-    default: getDateNow(),
-  })
-  createdAt!: string;
+  @Prop()
+  createdAt!: Date;
 }
 
 export const BlogUserSchema = SchemaFactory.createForClass(BlogUserModel);

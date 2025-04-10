@@ -23,7 +23,7 @@ export class AuthenticationService {
     }
 
     const newUser: IUserWithPassword = {
-      createdAt: '',
+      createdAt: new Date(),
       email: email,
       firstname: firstname,
       id: '',

@@ -11,7 +11,7 @@ export class BlogUserEntity implements IUserWithPassword, Entity<string> {
   public lastname!: string;
   public avatar?: string;
   public role!: EUserRole;
-  public createdAt!: string;
+  public createdAt!: Date;
 
   constructor(user: IUserWithPassword) {
     this.populate(user);
