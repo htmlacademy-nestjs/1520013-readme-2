@@ -3,11 +3,11 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { BlogUserRepository } from '../blog-user/blog.user.repository';
-import { CreateUserDto } from './dto/create-user.dto';
-import { AuthErrorMessage } from './authentication.constants';
 import { EUserRole, IUserWithPassword } from '@project/types';
 import { BlogUserEntity } from '../blog-user/blog-user.entity';
+import { BlogUserRepository } from '../blog-user/repository';
+import { AuthErrorMessage } from './authentication.constants';
+import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class AuthenticationService {
     }
 
     const newUser: IUserWithPassword = {
-      createdAt: '',
+      createdAt: new Date(),
       email: email,
       firstname: firstname,
       id: '',

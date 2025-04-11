@@ -1,0 +1,39 @@
+name: readme-dev
+
+services:
+  readme.user.mongo:
+    container_name: readme.user.mongo
+    image: mongo:7.0.7
+    restart: always
+    ports:
+      - 27030:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminDevPass
+      MONGO_INITDB_DATABASE: readme-user
+
+
+    volumes:
+      - readme.user.mongo:/data/db
+
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-user --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  readme.user.mongo.ui:
+    container_name: readme.user.mongo.ui
+    image: mongo-express
+    restart: always
+    ports:
+      - 2999:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: adminDevPass
+      ME_CONFIG_MONGODB_URL: mongodb://admin:adminDevPass@readme.user.mongo:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: adminDevPass
+
+volumes:
+  readme.user.mongo:
